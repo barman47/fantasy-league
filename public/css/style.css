@@ -1,0 +1,30 @@
+body, html {
+    height: 100%;
+}
+
+#background {
+    height: 100%;
+    background-image: url("/img/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+}
+
+nav {
+    background-color: #fff;
+    color: #333;
+}
+
+nav ul a {
+    color: #333;
+}
+
+nav .brand-logo {
+    color: #333;
+}
+
+#logo {
+    max-width: 50px;
+    height: auto;
+}

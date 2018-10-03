@@ -1,0 +1,35 @@
+{{#if errors}}
+    {{#each errors}}
+        <div>
+            <p class="red-text text-darken-2 error-messages center">{{this.msg}}</p>
+        </div>
+    {{/each}}
+{{/if}}
+<p class="red-text center">{{error}}</p>
+<div class="container section">
+    <form class="" action="/users/register" method="POST">
+        <div class="input-field">
+            <input type="text" id="name" name="name" class="validate" value="{{name}}">
+            <label for="name">Your name</label>
+            <span class="helper-text" data-error="Please provide your name" data-success="right"></span>
+        </div>
+        <div class="input-field">
+            <input type="text" id="username" name="username" class="validate" value="{{username}}">
+            <label for="name">Username Here</label>
+            <span class="helper-text" data-error="Invalid Username!" data-success="right"></span>
+        </div>
+        <div class="input-field">
+            <input type="password" id="password" name="password" class="validate" value="{{password}}">
+            <label for="name">Password</label>
+            <span class="helper-text" data-error="Invalid Password!" data-success="right">Password should be at least 8 characters long</span>
+        </div>
+        <div class="input-field">
+            <input type="password" id="confirmPassword" name="confirmPassword" class="validate" value="{{confirmPassword}}">
+            <label for="confirmPassword">Confirm Password</label>
+            <span class="helper-text" data-error="Passwords do not match" data-success="right"></span>
+        </div>
+        <div class="input-field">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
