@@ -5,16 +5,16 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (passport) => {
     passport.use('user', new LocalStrategy({
-        usernameField: "username",
-        passwordField: "password",
+        usernameField: "usernameLogin",
+        passwordField: "passwordLogin",
         passReqToCallback: true
-      }, function verifyCallback(req, username, password, done) {
-            User.findOne({ username: username }, function(err, user) {
+      }, function verifyCallback(req, usernameLogin, passwordLogin, done) {
+            User.findOne({ username: usernameLogin }, function(err, user) {
             if (err) return done(err);
             if (!user) {
                 return done(null, false, {msg: 'No user found'});
             }
-            bcrypt.compare(password, user.password, (err, isMatch) => {
+            bcrypt.compare(passwordLogin, user.password, (err, isMatch) => {
                 if (err) return done(err);
                 if (!isMatch) {
                     return done(null, false, {msg: 'Incorrect Password'});

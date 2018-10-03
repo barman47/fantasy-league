@@ -8,8 +8,12 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const passport = require('passport');
+const socketIO = require('socket.io');
+const moment = require('moment');
+const http = require('http');
 
 const User = require('./models/user');
+const Post = require('./models/post');
 const path = require('path');
 const publicPath = path.join(__dirname, 'public');
 const config = require('./config/database');
@@ -32,8 +36,10 @@ conn.on('error', (err) => {
 });
 
 var app = express();
+var server = http.createServer(app);
+var io = socketIO(server);
 
-// app.use(favicon(publicPath + '/img/favicon.png'));
+app.use(favicon(publicPath + '/img/favicon.png'));
 app.use(express.static(publicPath));
 app.engine('.hbs', exphbs({
     extname: '.hbs',
@@ -84,14 +90,43 @@ app.use((req, res, next) => {
 app.use('/users', users);
 app.use('/admins', admin);
 
+io.on('connection', (socket) => {
+    console.log('New user connected');
+
+    socket.on('info', (data) => {
+        let time = moment();
+        console.log(data);
+        socket.emit('newInfo', {
+            info: data.text,
+            category: data.category,
+            //time: time.format('h:mm a').fromNow(),
+            time: time.startOf("minute").fromNow()
+        });
+
+        let post = new Post({
+            category: data.category,
+            text: data.text,
+            time: time.format('dddd, Do MMMM YYYY - h:mm a')
+        });
+        post.save()
+        .then(() => {
+            console.log('post saved ', post);
+        })
+        .catch((err) => {
+            return console.log(err);
+        });
+    });
+
+    socket.on('disconnect', () => console.log('User disconnected'));
+});
+
 app.get('/', (req, res) => {
     res.render('index.hbs', {
         title: 'Title',
-        style: 'index.css',
-        script: 'index.js'
+        style: 'index.css'
     });
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

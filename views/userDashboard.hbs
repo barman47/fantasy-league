@@ -1,0 +1,27 @@
+<main>
+    <div class="container">
+        <h3 class="teal-text center">Fantasy English Premeir League Live Updates</h3>
+        <hr><br>
+        {{#if posts}}
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Information</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each posts}}
+                    <tr>
+                        <td>{{this.category}}</td>
+                        <td>{{this.text}}</td>
+                        <td>{{this.time}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+    </div>
+</main>
+{{> footer}}

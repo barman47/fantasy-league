@@ -1,17 +1,27 @@
-<div class="container section">
-    <form class="" action="/users/login" method="POST">
-        <div class="input-field">
-            <input type="text" id="username" name="username" class="validate">
-            <label for="name">Username Here</label>
-            <span class="helper-text" data-error="Please Provide your username"></span>
-        </div>
-        <div class="input-field">
-            <input type="password" id="password" name="password" class="validate">
-            <label for="name">Password</label>
-            <span class="helper-text" data-error="Please Provide your username"></span>
-        </div>
-        <div class="input-field">
-            <button type="submit">Log In</button>
-        </div>
-    </form>
-</div>
+<main>
+    <div class="container section">
+        <form name="loginForm" action="/users/login" method="POST">
+            <h4 class="center">User Login</h4>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="mdi mdi-account-outline prefix form-icons"></i>
+                    <input type="text" id="usernameLogin" name="usernameLogin" class="validate" autofocus>
+                    <label for="usernameLogin">Username Here</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="mdi mdi-lock-outline prefix form-icons"></i>
+                    <input type="password" id="passwordLogin" name="passwordLogin" class="validate">
+                    <label for="passwordLogin">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-white" id="loginButton" type="submit">Log In</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+{{> footer}}

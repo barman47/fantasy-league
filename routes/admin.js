@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Admin = require('../models/admin');
+const User = require('../models/user');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
@@ -9,15 +10,15 @@ const router = express.Router();
 router.post('/register', (req, res) => {
     const body = req.body;
     const newAdmin = {
-        name: body.name,
-        username: body.username,
-        password: body.password,
+        name: body.signupName,
+        username: body.signupUsername,
+        password: body.signupPassword,
         secret: body.secret
     };
     
-    req.checkBody('name', 'Name is required').notEmpty();
-    req.checkBody('username', 'username is required').notEmpty();
-    req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('signupName', 'Name is required').notEmpty();
+    req.checkBody('signupUsername', 'username is required').notEmpty();
+    req.checkBody('signupPassword', 'Password is required').notEmpty();
     req.checkBody('secret', 'Incorrect Secret Key!').equals('yousee');
 
     let signupErrors = req.validationErrors();
@@ -99,13 +100,30 @@ router.post('/login', (req, res, next) => {
 
 router.get('/dashboard/:id', (req, res) => {
     let query = {_id: req.params.id};
+     
     Admin.findOne(query, (err, admin) => {
         if (err) {
             return console.log(err);
         } else {
-            res.render('adminDashboard', {
-                admin
-            }); 
+            User.find({}, (err, users) => {
+                if (err) {
+                    return res.send(err);
+                }
+                Post.find({}, (err, posts) => {
+                    if (err) {
+                        return res.send(err);
+                    }
+                    res.render('adminDashboard', {
+                        title: 'Admin - Dashboard',
+                        style: 'adminDashboard.css',
+                        script: 'adminDashboard.js',
+                        admin,
+                        users,
+                        posts
+                    }); 
+
+                })
+            });
         }
     });
 });

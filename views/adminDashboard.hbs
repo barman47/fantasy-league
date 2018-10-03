@@ -1,1 +1,79 @@
-<h1>Admin Dashboard</h1>
+<main>
+    <h1 class="teal-text center">Admin Dashboard</h1>
+    <div class="container">
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header teal-text"><i class="mdi mdi-information-outline"></i>Post Update</div>
+                <div class="collapsible-body">
+                    <div>
+                        <form name="dataForm" action="">
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <select name="category">
+                                        <option disabled selected>Choose your option</option>
+                                        <option>Fixture</option>
+                                        <option>Final Score</option>
+                                        <option>Update</option>
+                                    </select>
+                                    <label>Materialize Select</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <textarea id="dataTextarea" name="dataTextarea" class="materialize-textarea"></textarea>
+                                    <label for="dataTextarea">Enter Information to post...</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <button class="btn waves-effect waves-white" type="submit" id="submitButton" style="width: 100%;">POST</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header teal-text"><i class="mdi mdi-account-group"></i>Users</div>
+                <div class="collapsible-body">
+                    {{#if users}}
+                        <ul id="computer-courses" class="collection with-header">
+                            <li class="collection-header center"><h4>ACTIVE USERS</h4></li>
+                        {{#each users}}
+                            <li class="collection-item">{{this.username}}</li>
+                        {{/each}}
+                        </ul>                    
+                    {{else}}
+                        <h3 class="center">No Users to Display</h3>
+                    {{/if}}
+                </div>
+            </li>
+            <li class="active">
+                <div class="collapsible-header teal-text"><i class="mdi mdi-comment-text-multiple-outline"></i>Posts</div>
+                <div class="collapsible-body">
+                    {{#if posts}}
+                        <table class="centered">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Information</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{#each posts}}
+                                <tr>
+                                    <td>{{this.category}}</td>
+                                    <td>{{this.text}}</td>
+                                    <td>{{this.time}}</td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    {{/if}}
+                </div>
+            </li>
+        </ul>
+    </div>
+</main>
+<script src="/socket.io/socket.io.js"></script>

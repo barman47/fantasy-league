@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    $(".dropdown-trigger").dropdown();
-    $('.modal').modal();
+    $('.slider').slider({fullWidth: true});
     var loginForm = document.adminLoginForm;
     var signUpForm = document.adminSignupForm;
     var loginInputs = [
@@ -8,9 +7,9 @@ $(document).ready(function () {
         loginForm.loginPassword,
     ];
     var signupInputs = [
-        signUpForm.name,
-        signUpForm.username,
-        signUpForm.password,
+        signUpForm.signupName,
+        signUpForm.signupUsername,
+        signUpForm.signupUsername,
         signUpForm.secret
     ];
 

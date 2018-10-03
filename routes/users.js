@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -89,7 +90,8 @@ router.post('/register', (req, res) => {
 router.get('/login', (req, res) => {
     res.render('login', {
         title: 'User login',
-        style: 'login.css'
+        style: 'login.css',
+        script: 'login.js'
     });
 });
 
@@ -104,12 +106,47 @@ router.post('/login', (req, res, next) => {
         }
 
         req.logIn(user, (err) => {
-            res.send('You are logged in');
-            // let id = user._id;
-            // id = mongoose.Types.ObjectId(id); 
-            // res.redirect(`/users/dashboard/${id}`);
+            let id = mongoose.Types.ObjectId(user._id);
+            res.redirect(`/users/dashboard/${id}`);
         });
     })(req, res, next);
+});
+
+router.get('/dashboard/:id', (req, res) => {
+    let query = {_id: req.params.id};
+    User.findOne(query, (err, user) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            Post.find()
+            .then((posts) => {
+                res.render('userDashboard', {
+                    title: 'Fantasy English Premier League',
+                    style: 'userDashboard.css',
+                    script: 'userDashboard.js',
+                    user,
+                    posts
+                }); 
+            })
+            .catch((err) => {
+                return console.log(err);
+            });
+        }
+    });
+});
+
+router.get('/viewUsers', (req, res) => {
+    User.find({}, (err, users) => {
+        if (err) {
+            return res.send('err');
+        } else {
+            res.render('users', {
+                title: 'Fantasy League - Users',
+                users,
+                user: true
+            });
+        }
+    });
 });
 
 router.get('/logout', (req, res) => {

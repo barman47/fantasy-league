@@ -1,109 +1,118 @@
-<div class="navbar-fixed">
-    <nav>
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo"><img id="logo" src="/img/logo.png" class="responsive-img"></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/users/login">Log in</a></li>
-                    <li><a href="/users/register">Register</a></li>
-                    <li><a href="/users/viewUsers">View Users</a></li>
-                    <li><a href="/!#" class="dropdown-trigger" data-target="adminDropDown">Admin</a></li>
-                    {{#if user}}<li><a href="/logout">Log out</a></li>{{/if}}
-                </ul>
+<header>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="/" class="brand-logo"><img id="logo" src="/img/logo.png" class="responsive-img"></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="/">Home</a></li>
+                        {{#if user}}
+                            <li><a href="/users/viewUsers">View Users</a></li>
+                            <li><a href="/users/logout">Log out</a></li>
+                        {{else}}
+                            <li><a href="/users/login">Log in</a></li>
+                            <li><a href="/users/register">Register</a></li>
+                            <li><a href="/!#" class="dropdown-trigger" data-target="adminDropDown">Admin</a></li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <ul id="adminDropDown" class="dropdown-content">
+            {{#if admin}}
+                <li><a href="/admins/logout" class="dropdown-trigger" data-target="adminDropDown">Logout</a></li>
+            {{else}}
+                <li><a data-target="loginModal" class="modal-trigger">Login</a></li>
+                <li><a data-target="signupModal" class="modal-trigger">Register</a></li>
+            {{/if}}
+        </ul>
+        <div id="loginModal" class="modal">
+            <div class="modal-content">
+                <h4 class="center">Admin Login</h4>
+                <form name="adminLoginForm" method="POST" action="/admins/login">
+                {{#if loginErrors}}
+                    {{#each loginErrors}}
+                        <div>
+                            <p class="red-text text-darken-2 error-messages center">{{this.msg}}</p>
+                        </div>
+                    {{/each}}
+                {{/if}}
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <i class="mdi mdi-account-outline prefix form-icons"></i>
+                            <input type="text" name="loginUsername" id="loginUsername" class="validate" autofocus value="{{loginUsername}}">
+                            <label for="loginUsername">Username</label>
+                            <span class="helper-text" data-error="Invalid Username"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <i class="mdi mdi-lock prefix form-icons"></i>
+                            <input type="password" name="loginPassword" id="loginPassword" class="validate" value="{{loginPassword}}">
+                            <label for="loginPassword">Password</label>
+                            <span class="helper-text" data-error="Please provide your password"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <input class="btn" type="submit" id="loginButton" value="Log In">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </nav>
-    <ul id="adminDropDown" class="dropdown-content">
-        <li><a data-target="loginModal" class="modal-trigger">Login</a></li>
-        <li><a data-target="signupModal" class="modal-trigger">Register</a></li>
-    </ul>
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <h4 class="center">Admin Login</h4>
-            <form name="adminLoginForm" method="POST" action="/admins/login">
-            {{#if loginErrors}}
-                {{#each loginErrors}}
-                    <div>
-                        <p class="red-text text-darken-2 error-messages center">{{this.msg}}</p>
+
+        <div id="signupModal" class="modal">
+            <div class="modal-content">
+                {{#if signupErrors}}
+                    {{#each signupErrors}}
+                        <div>
+                            <p class="red-text text-darken-2 error-messages center">{{this.msg}}</p>
+                        </div>
+                    {{/each}}
+                {{/if}}
+                <h4 class="center">Admin Signup</h4>
+
+                <form name="adminSignupForm" method="POST" action="/admins/register">
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <i class="mdi mdi-account-outline prefix form-icons"></i>
+                            <input type="text" name="signupName" id="signupName" class="validate" value="{{name}}">
+                            <label for="signupName">Name</label>
+                            <span class="helper-text" data-error="Invalid Name"></span>
+                        </div>
                     </div>
-                {{/each}}
-            {{/if}}
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-account-outline prefix form-icons"></i>
-                        <input type="text" name="loginUsername" id="loginUsername" class="validate" autofocus value="{{loginUsername}}">
-                        <label for="loginUsername">Username</label>
-                        <span class="helper-text" data-error="Invalid Username"></span>
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <i class="mdi mdi-account-outline prefix form-icons"></i>
+                            <input type="text" name="signupUsername" id="signupUsername" class="validate" value="{{username}}">
+                            <label for="signupUsername">Username</label>
+                            <span class="helper-text" data-error="Invalid Username"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-lock prefix form-icons"></i>
-                        <input type="password" name="loginPassword" id="loginPassword" class="validate" value="{{loginPassword}}">
-                        <label for="loginPassword">Password</label>
-                        <span class="helper-text" data-error="Please provide your password"></span>
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <i class="mdi mdi-lock prefix form-icons"></i>
+                            <input type="password" name="signupPassword" id="signupPassword" class="validate" value="{{password}}">
+                            <label for="signupPassword">Password</label>
+                            <span class="helper-text" data-error="Please provide your password"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <input class="btn" type="submit" id="loginButton" value="Log In">
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <i class="mdi mdi-lock prefix form-icons"></i>
+                            <input type="password" name="secret" id="secret" class="validate" value="{{secret}}">
+                            <label for="secret">Secret Key</label>
+                            <span class="helper-text" data-error="Please the secret key"></span>
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="row">
+                        <div class="col s12 input-field">
+                            <input class="btn" type="submit" id="signupButton" value="Sign Up">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
-    <div id="signupModal" class="modal">
-        <div class="modal-content">
-            {{#if signupErrors}}
-                {{#each signupErrors}}
-                    <div>
-                        <p class="red-text text-darken-2 error-messages center">{{this.msg}}</p>
-                    </div>
-                {{/each}}
-            {{/if}}
-            <h4 class="center">Admin Signup</h4>
-
-            <form name="adminSignupForm" method="POST" action="/admins/register">
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-account-outline prefix form-icons"></i>
-                        <input type="text" name="name" id="name" class="validate" value="{{name}}">
-                        <label for="name">Name</label>
-                        <span class="helper-text" data-error="Invalid Name"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-account-outline prefix form-icons"></i>
-                        <input type="text" name="username" id="username" class="validate" value="{{username}}">
-                        <label for="username">Username</label>
-                        <span class="helper-text" data-error="Invalid Username"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-lock prefix form-icons"></i>
-                        <input type="password" name="password" id="password" class="validate" value="{{password}}">
-                        <label for="password">Password</label>
-                        <span class="helper-text" data-error="Please provide your password"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-lock prefix form-icons"></i>
-                        <input type="password" name="secret" id="secret" class="validate" value="{{secret}}">
-                        <label for="secret">Secret Key</label>
-                        <span class="helper-text" data-error="Please the secret key"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <input class="btn" type="submit" id="signupButton" value="Sign Up">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+</header>

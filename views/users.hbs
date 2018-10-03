@@ -1,0 +1,16 @@
+<main>
+    <br><br>
+    <div class="container">
+        {{#if users}}
+            <ul id="computer-courses" class="collection with-header">
+                <li class="collection-header center"><h4>ACTIVE USERS</h4></li>
+                {{#each users}}
+                    <li class="collection-item">{{this.username}}</li>
+                {{/each}}
+            </ul>                    
+        {{else}}
+            <h3 class="center">No Users to Display</h3>
+        {{/if}}
+    </div>
+</main>
+{{> footer}}
