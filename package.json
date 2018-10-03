@@ -4,7 +4,12 @@
   "description": "A fantasy soccer league app",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "engines" : {
+    "npm": "5.4.2",
+    "node": "^8.7.0"
   },
   "keywords": [
     "Nodejs",

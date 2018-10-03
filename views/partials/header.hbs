@@ -4,15 +4,16 @@
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="/" class="brand-logo"><img id="logo" src="/img/logo.png" class="responsive-img"></a>
+                    <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="mdi mdi-menu menu-icon"></i></a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/"><i class="mdi mdi-home left"></i>Home</a></li>
                         {{#if user}}
-                            <li><a href="/users/viewUsers">View Users</a></li>
-                            <li><a href="/users/logout">Log out</a></li>
+                            <li><a href="/users/viewUsers"><i class="mdi mdi-account-group left"></i>View Users</a></li>
+                            <li><a href="/users/logout"><i class="mdi mdi-logout-variant left"></i>Log out</a></li>
                         {{else}}
-                            <li><a href="/users/login">Log in</a></li>
-                            <li><a href="/users/register">Register</a></li>
-                            <li><a href="/!#" class="dropdown-trigger" data-target="adminDropDown">Admin</a></li>
+                            <li><a href="/users/login"><i class="mdi mdi-login-variant left"></i>Log in</a></li>
+                            <li><a href="/users/register"><i class="mdi mdi-account-plus left"></i>Register</a></li>
+                            <li><a href="/!#" class="dropdown-trigger" data-target="adminDropDown"><i class="mdi mdi-home left"></i>Admin</a></li>
                         {{/if}}
                     </ul>
                 </div>
@@ -20,10 +21,21 @@
         </nav>
         <ul id="adminDropDown" class="dropdown-content">
             {{#if admin}}
-                <li><a href="/admins/logout" class="dropdown-trigger" data-target="adminDropDown">Logout</a></li>
+                <li><a href="/admins/logout" class="dropdown-trigger" data-target="adminDropDown"><i class="mdi mdi-logout-variant left"></i>Logout</a></li>
             {{else}}
-                <li><a data-target="loginModal" class="modal-trigger">Login</a></li>
-                <li><a data-target="signupModal" class="modal-trigger">Register</a></li>
+                <li><a data-target="loginModal" class="modal-trigger"><i class="mdi mdi-login-variant left"></i>Login</a></li>
+                <li><a data-target="signupModal" class="modal-trigger"><i class="mdi mdi-account-plus left"></i>Register</a></li>
+            {{/if}}
+        </ul>
+        <ul id="mobile-nav" class="sidenav">
+            <li><a href="/"><i class="mdi mdi-home left"></i>Home</a></li>
+            {{#if user}}
+                <li><a href="/users/viewUsers"><i class="mdi mdi-account-group left"></i>View Users</a></li>
+                <li><a href="/users/logout"><i class="mdi mdi-logout-variant left"></i>Log out</a></li>
+            {{else}}
+                <li><a href="/users/login"><i class="mdi mdi-login-variant left"></i>Log in</a></li>
+                <li><a href="/users/register"><i class="mdi mdi-account-plus left"></i>Register</a></li>
+                <li><a href="/!#" class="dropdown-trigger" data-target="adminDropDown"><i class="mdi mdi-home left"></i>Admin</a></li>
             {{/if}}
         </ul>
         <div id="loginModal" class="modal">

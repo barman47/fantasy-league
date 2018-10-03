@@ -8,15 +8,6 @@ main {
     flex: 1 0 auto;
 }
 
-#background {
-    height: 100%;
-    background-image: url("/img/background.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
-}
-
 nav {
     background-color: #fff;
     color: #333;
@@ -28,6 +19,15 @@ nav ul a {
 
 nav .brand-logo {
     color: #333;
+}
+
+.menu-icon {
+    z-index: 99 !important;
+    color: #333;;
+}
+
+.sidenav-overlay {
+    z-index: 99;
 }
 
 #logo {

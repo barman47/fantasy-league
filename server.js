@@ -12,7 +12,6 @@ const socketIO = require('socket.io');
 const moment = require('moment');
 const http = require('http');
 
-const User = require('./models/user');
 const Post = require('./models/post');
 const path = require('path');
 const publicPath = path.join(__dirname, 'public');
@@ -96,7 +95,7 @@ io.on('connection', (socket) => {
     socket.on('info', (data) => {
         let time = moment();
         console.log(data);
-        socket.emit('newInfo', {
+        io.emit('newInfo', {
             info: data.text,
             category: data.category,
             //time: time.format('h:mm a').fromNow(),

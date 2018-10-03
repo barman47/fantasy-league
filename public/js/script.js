@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('.slider').slider({fullWidth: true});
+    $('.sidenav').sidenav();
     var loginForm = document.adminLoginForm;
     var signUpForm = document.adminSignupForm;
     var loginInputs = [
