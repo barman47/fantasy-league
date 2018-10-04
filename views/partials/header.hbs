@@ -23,6 +23,14 @@
             {{#if admin}}
                 <li><a href="/admins/logout" class="dropdown-trigger" data-target="adminDropDown"><i class="mdi mdi-logout-variant left"></i>Logout</a></li>
             {{else}}
+                <li><a data-target="loginModal" class="modal-trigger">Login</a></li>
+                <li><a data-target="signupModal" class="modal-trigger">Register</a></li>
+            {{/if}}
+        </ul>
+        <ul id="adminMobileDropDown" class="dropdown-content">
+            {{#if admin}}
+                <li><a href="/admins/logout" class="dropdown-trigger" data-target="adminDropDown"><i class="mdi mdi-logout-variant left"></i>Logout</a></li>
+            {{else}}
                 <li><a data-target="loginModal" class="modal-trigger"><i class="mdi mdi-login-variant left"></i>Login</a></li>
                 <li><a data-target="signupModal" class="modal-trigger"><i class="mdi mdi-account-plus left"></i>Register</a></li>
             {{/if}}
@@ -35,7 +43,7 @@
             {{else}}
                 <li><a href="/users/login"><i class="mdi mdi-login-variant left"></i>Log in</a></li>
                 <li><a href="/users/register"><i class="mdi mdi-account-plus left"></i>Register</a></li>
-                <li><a href="/!#" class="dropdown-trigger" data-target="adminDropDown"><i class="mdi mdi-home left"></i>Admin</a></li>
+                <li><a href="/!#" class="dropdown-trigger" data-target="adminMobileDropDown"><i class="mdi mdi-home left"></i>Admin</a></li>
             {{/if}}
         </ul>
         <div id="loginModal" class="modal">

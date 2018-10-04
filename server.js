@@ -121,7 +121,7 @@ io.on('connection', (socket) => {
 
 app.get('/', (req, res) => {
     res.render('index.hbs', {
-        title: 'Title',
+        title: 'Fantasy Football League - Home',
         style: 'index.css'
     });
 });
